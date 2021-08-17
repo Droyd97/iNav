@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+    iNav Dashboard
+</title>
+<style>
+th, td {
+    font-size: 10px;
+}
+h1 {text-align: center;}
+</style> 
+</head>
+<body></body>
+
+
+
+<h1>iNAV Dashboard</h1>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+    <li><span style="background-color: yellow"> {{ message }}</span></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+{% endwith %}
+{% block body %}{% endblock %}
+
+<p>This is a dashboard for simulating the iNav of an iShares ETF. The dashboard loads an iShares Excel file (Note: iShares use Excel wrapped xml files so standard excel files are currently not imported). The initial Nav is calculated by the following:</p>
+<img src="/static/nav.png" width=300px>
+
+
+<p>Subsequent iterations are updated using:</p>
+<img src='/static/inav.png' width=300px>
+
+<p>The simulation is run for 1000 iterations and is done by changing 10% of the prices using a normal distribution to model the returns. Two methods are applied for the calculation. The fist is the "Full" method that calculates all the returns for every Bond. The second uses a 'partial' method which masks out the unchanged prices.</p>
+
+<h3>ETF Files</h3>
+<p>Note: Currently only one file can be uploaded at a time</p>
+
+<form method=post enctype=multipart/form-data>
+    <input type=file name=file>
+    <input type=submit name=upload value=Upload>
+</form>
+
+<ul>{% for item in files %}
+    <li>{{ item }}</li>
+    {% endfor  %}
+</ul>
+
+<form method=post action="/">
+    <input type=submit name=delete value=Clear>
+</form>
+
+
+
+<form method=post action='/'>
+    <input type=submit name=load value=Load>
+</form>
+<p>Is the file loaded: {{ is_loaded }}</p>
+<p> First 5 holdings of the ETF:</p>
+{{ table|safe }}
+
+<br>
+
+<form method=post action='/'>
+    <div class="control">
+        <label class="radio">
+          <input type="radio" name="method" id="full" value="full" checked>
+          Full Calculation
+        </label>
+        <label class="radio">
+          <input type="radio" name="method" id="partial" value="partial">
+          Partial Calculation
+        </label>
+      </div> <br>
+      <input type=submit name=run value=run>
+</form>
+<!-- <form method=post action='/'>
+    
+</form> -->
+
+<p>Initial NAV: {{ initial_nav }}</p>
+<p>iNav after 1000 iterations: {{ result }}</p>
+<p>Time taken: {{ time }}</p>
+<br>
+
+<table>
+    <tbody>
+        {% for item in historical_nav %}
+            <tr style="font-size: 16px;"><td style="font-size: 16px;">{{ item }}</td></tr>
+        {% endfor  %}
+    </tbody>
+
+</table>
+
+
+</body>
+</html>
