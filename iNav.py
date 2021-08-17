@@ -84,3 +84,6 @@ def main():
         table=session['result_var']['holdings'],
         historical_nav=session['result_var']['hist_nav'],
         is_loaded=session['is_loaded'])
+
+if __name__ == "__main__":
+    app.run()
