@@ -7,10 +7,10 @@ from flask import render_template
 from ETFiNavSimulator import *
 
 app = Flask(__name__)
-app.secret_key = 'gigigi'
+app.secret_key = 'hihihihk'
 base_dir = os.getcwd()
 
-UPLOAD_FOLDER = base_dir + '/ishare_etfs'
+UPLOAD_FOLDER = base_dir + '/uploads'
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
