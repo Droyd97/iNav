@@ -25,6 +25,9 @@ def clear_variables(dict):
 
 @app.route('/', methods=['POST', 'GET'])
 def main():
+    if not os.path.isdir('ishare_etfs'):
+        os.mkdir('ishare_etfs')
+
     if 'result_var' not in session:
         session['result_var'] = {'init_nav': ' ', 'iNav': ' ', 'time': ' ', 'holdings': ' ', 'hist_nav': ' '}
     if 'is_loaded' not in session:

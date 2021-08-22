@@ -6,7 +6,8 @@ import pandas as pd
 
 # Load excel spreadsheet
 # etfs, worksheets = load_data('iShares--Corp-Bond-UCITS-ETF-USD-Dist-USD-Distributing_fund.xls', folder=False)
-
+if not os.path.isdir('ishare_etfs'):
+    os.mkdir('ishare_etfs')
 
 # Download all xls files from etf provider
 utils.get_files(etf_lists.ishares_etf_list, 'ishares')
