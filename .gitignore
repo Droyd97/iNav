@@ -1,6 +1,8 @@
 iNav/lib/**
 iNav/bin/**
-# __pycache__/**
+__pycache__/**
 
 .DS_Store
 iNav/pyvenv.cfg
+
+ishare_etfs/**
