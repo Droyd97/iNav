@@ -23,7 +23,7 @@ holdings_matrix = utils.generate_holdings_matrix(prices, etf_worksheets)
 
 
 # Run simulation
-etfs = ETFiNavSimulator(initial_nav, prices['Price'].to_numpy(), holdings_matrix, shares_outstanding, calc_method='partial')
+etfs = ETFiNavSimulator(initial_nav, prices['Price'].to_numpy(), holdings_matrix, shares_outstanding, calc_method='full')
 sim_time = etfs.run_simulation()
 
 df = pd.DataFrame([etf_lists.ishares_etf_list.keys(), etfs.initial_nav, etfs.inav]).transpose()

@@ -1,0 +1,6 @@
+iNav/lib/**
+iNav/bin/**
+# __pycache__/**
+
+.DS_Store
+iNav/pyvenv.cfg

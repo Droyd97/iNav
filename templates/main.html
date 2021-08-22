@@ -4,6 +4,7 @@
 <title>
     iNav Dashboard
 </title>
+<link rel="stylesheet" href="{{ url_for('static', filename='/styles/dashboard.css') }}">
 <style>
 th, td {
     font-size: 10px;
@@ -38,12 +39,15 @@ h1 {text-align: center;}
 <p>The simulation is run for 1000 iterations and is done by changing 10% of the prices using a normal distribution to model the returns. Two methods are applied for the calculation. The fist is the "Full" method that calculates all the returns for every Bond. The second uses a 'partial' method which masks out the unchanged prices.</p>
 
 <h3>ETF Files</h3>
-<p>Note: Currently only one file can be uploaded at a time</p>
+<p>Scrape the iShares website for the Fixed Income ETFs listed in etf_lists</p>
 
-<form method=post enctype=multipart/form-data>
+<form method=post action="/">
+    <input type=submit name=scrape value=Scrape>
+</form>
+<!-- <form method=post enctype=multipart/form-data>
     <input type=file name=file>
     <input type=submit name=upload value=Upload>
-</form>
+</form> -->
 
 <ul>{% for item in files %}
     <li>{{ item }}</li>
@@ -86,16 +90,18 @@ h1 {text-align: center;}
 <p>iNav after 1000 iterations: {{ result }}</p>
 <p>Time taken: {{ time }}</p>
 <br>
-
-<table>
-    <tbody>
-        {% for item in historical_nav %}
-            <tr style="font-size: 16px;"><td style="font-size: 16px;">{{ item }}</td></tr>
-        {% endfor  %}
-    </tbody>
-
-</table>
-
+<p>Every 10th iNav</p>
+<div id="table-wrapper">
+    <div id='table_scroll'>
+        <table>
+            <tbody>
+                {% for item in historical_nav %}
+                    <tr style="font-size: 16px;"><td style="font-size: 16px;">{{ item }}</td></tr>
+                {% endfor  %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
 </body>
 </html>

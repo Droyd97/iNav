@@ -46,10 +46,10 @@ class ETFiNavSimulator():
         # Partial is currently slower. Probably due to dot product of non-contigious array
         elif method == 'partial':
             altered_indices = np.nonzero(price_diff)
-            y = np.zeros(len(altered_indices))
-            x = np.zeros(len(altered_indices))
-            y = price_diff[altered_indices]
-            x = self.shares[altered_indices]
+            # y = np.zeros(len(altered_indices))
+            # x = np.zeros(len(altered_indices))
+            # y = price_diff[altered_indices]
+            # x = self.shares[altered_indices]
             self.inav += np.matmul(price_diff[altered_indices].T, self.holdings_matrix[altered_indices]) / self.out_shares
     
     def run_simulation(self, iters=1000, method='full'):
